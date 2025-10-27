@@ -51,8 +51,7 @@ const navItems = [
   { label: "Features", href: "#features" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Pricing", href: "#pricing" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "Support", href: "/support" },
 ];
 
 const features = [
@@ -664,6 +663,7 @@ const PageFooter = () => (
         <Box sx={{ mt: 1 }}>
           <Button component={RouterLink} to="/privacy" color="inherit" size="small" sx={{ textTransform: "none", mx: 1 }}>Privacy Policy</Button>
           <Button component={RouterLink} to="/terms" color="inherit" size="small" sx={{ textTransform: "none", mx: 1 }}>Terms of Service</Button>
+          <Button component={RouterLink} to="/support" color="inherit" size="small" sx={{ textTransform: "none", mx: 1 }}>Support</Button> {/* Add this line */}
         </Box>
       </Container>
     </PageFooterContainer>
