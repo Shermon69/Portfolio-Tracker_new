@@ -29,6 +29,7 @@ import { useTheme } from "./contexts/ThemeContext"; // Assuming you have this fo
 
 import Reports from "./pages/Reports";
 import ReportRoutes from "./pages/ReportRoutes";
+import FAQPage from "./pages/FAQPage";
 
 // Placeholder components for other pages
 const IncomePage = () => <div>Income Page</div>;
@@ -151,6 +152,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ReportRoutes />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/faq"
+              element={
+                <ProtectedRoute>
+                  <FAQPage />
                 </ProtectedRoute>
               }
             />
