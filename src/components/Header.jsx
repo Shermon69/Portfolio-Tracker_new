@@ -20,6 +20,7 @@ import {
   Settings as SettingsIcon,
   Logout as LogoutIcon,
   Dashboard as DashboardIcon,
+  HelpOutline as HelpOutlineIcon, // Add this line
 } from "@mui/icons-material";
 
 function Header() {
@@ -86,6 +87,7 @@ function Header() {
             <li><NavLink to="/brokers" className={getLinkClass}>Brokers</NavLink></li>
             <li><NavLink to="/holdings" className={getLinkClass}>Holdings</NavLink></li>
             <li><NavLink to="/reports" className={getLinkClass}>Reports</NavLink></li>
+            <li><NavLink to="/faq" className={getLinkClass}>FAQ</NavLink></li>
           </ul>
         ) : (
           <ul>

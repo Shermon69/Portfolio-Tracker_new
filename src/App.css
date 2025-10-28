@@ -61,3 +61,16 @@
 .light-mode ::-webkit-scrollbar-thumb:hover {
   background: #aaa;
 }
+
+/* Add these styles to your existing App.css */
+
+.public-page {
+  padding-top: 80px; /* Height of the navigation bar plus some spacing */
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--background-color);
+}
+
+.public-content {
+  width: 100%;
+}

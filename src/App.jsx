@@ -11,6 +11,7 @@ import Login from "./pages/Login"; // Assuming your LoginPage component is named
 import SignUp from "./pages/Signup";
 import Holdings from "./pages/Holdings";
 import LandingPage from "./pages/LandingPage";
+import SupportPage from "./pages/SupportPage";
 import HomePage from "./pages/HomePage";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -28,6 +29,7 @@ import { useTheme } from "./contexts/ThemeContext"; // Assuming you have this fo
 
 import Reports from "./pages/Reports";
 import ReportRoutes from "./pages/ReportRoutes";
+import FAQPage from "./pages/FAQPage";
 
 // Placeholder components for other pages
 const IncomePage = () => <div>Income Page</div>;
@@ -62,6 +64,7 @@ function App() {
             */}
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/features" element={<FeaturesPage />} />
+            <Route path="/support" element={<SupportPage />} />
 
             {/* Landing page (only for non-authenticated users) */}
             <Route
@@ -149,6 +152,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ReportRoutes />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/faq"
+              element={
+                <ProtectedRoute>
+                  <FAQPage />
                 </ProtectedRoute>
               }
             />
