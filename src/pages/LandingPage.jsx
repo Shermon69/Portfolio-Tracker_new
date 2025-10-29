@@ -182,7 +182,11 @@ const LogoText = styled(Typography)(() => ({
   letterSpacing: -0.5,
   cursor: "pointer",
   transition: "opacity 0.2s ease",
-  "&:hover": { opacity: 0.8 },
+  textDecoration: 'none', // Add this line
+  "&:hover": { 
+    opacity: 0.8,
+    textDecoration: 'none', // Also remove on hover
+  },
 }));
 
 const MobileDrawer = styled(Drawer)(({ theme }) => ({
@@ -456,12 +460,13 @@ const FeatureItem = styled(Paper)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
+  height: "100%", // Ensure full height
+  minHeight: 280, // Add minimum height for consistency
   justifyContent: "flex-start",
   borderRadius: 20,
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: "#1a1a2e", // Dark background
   border: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
   transition: "all 0.3s ease",
-  height: "100%",
   boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.05)}`,
   "&:hover": {
     transform: "translateY(-8px)",
@@ -485,38 +490,71 @@ const IconTile = styled("div")(({ theme, bg }) => ({
 
 const FeaturesSection = () => {
   const marketing = [
-    { icon: <TrendingUp />, title: "Portfolio Analysis", desc: "Let tools help track your allocation and analyze recent performance using sophisticated algorithms.", bg: "linear-gradient(135deg,#3B82F6,#1D4ED8)" },
-    { icon: <BarChart />, title: "Market Insights", desc: "Start your portfolio's growth with our data analytics and performance tracking tools.", bg: "linear-gradient(135deg,#A78BFA,#7C3AED)" },
-    { icon: <LightbulbOutlined />, title: "Smart Recommendations", desc: "Effectively shape new market strategies by using data and investment performance insights.", bg: "linear-gradient(135deg,#34D399,#059669)" },
-    { icon: <Groups />, title: "Community Insights", desc: "Your social conversation and investing ideas directly affect your total investment income.", bg: "linear-gradient(135deg,#FB923C,#F97316)" },
+    { 
+      icon: <TrendingUp />, 
+      title: "Portfolio Analysis", 
+      desc: "Track your allocation and analyze performance using sophisticated algorithms.", 
+      bg: "linear-gradient(135deg,#3B82F6,#1D4ED8)" 
+    },
+    { 
+      icon: <BarChart />, 
+      title: "Market Insights", 
+      desc: "Enhance portfolio growth with our data analytics and performance tracking.", 
+      bg: "linear-gradient(135deg,#A78BFA,#7C3AED)" 
+    },
+    { 
+      icon: <LightbulbOutlined />, 
+      title: "Smart Recommendations", 
+      desc: "Effectively shape new market strategies using data-driven investment insights.", 
+      bg: "linear-gradient(135deg,#34D399,#059669)" 
+    },
+    { 
+      icon: <Groups />, 
+      title: "Community Insights", 
+      desc: "Leverage social conversations and community-driven ideas to improve returns.", 
+      bg: "linear-gradient(135deg,#FB923C,#F97316)" 
+    },
   ];
 
   return (
-    <Box id="features" sx={{ py: 12, backgroundColor: "#f8fafc" }}> {/* Softer background */}
+    <Box id="features" sx={{ py: 12, backgroundColor: "#f8fafc" }}>
       <FullWidth>
         <Fade direction="up" triggerOnce>
-          <Box textAlign="center">
-            <SectionTitle variant="h3" component="h2" sx={{ color: '#1e293b' }}> {/* Dark color */}
+          <Box textAlign="center" sx={{ mb: 8 }}>
+            <SectionTitle variant="h3" component="h2" sx={{ color: '#1e293b' }}>
               Unlock Powerful Investment Tools
             </SectionTitle>
-            <SectionSubtitle variant="h6" sx={{ color: '#64748b' }}> {/* Medium gray */}
+            <SectionSubtitle variant="h6" sx={{ color: '#64748b' }}>
               Everything you need to track, analyze, and improve your portfolio.
             </SectionSubtitle>
           </Box>
         </Fade>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={4} alignItems="stretch">
           {marketing.map((f, i) => (
             <Grid item xs={12} sm={6} md={3} key={f.title}>
               <Fade direction="up" delay={i * 120} triggerOnce>
                 <FeatureItem elevation={0} className="lp-card">
                   <IconTile bg={f.bg}>{f.icon}</IconTile>
-                  <Typography variant="h6" fontWeight={700} gutterBottom sx={{ 
-                    color: '#ffffff' // Changed to bright white
-                  }}>
+                  <Typography 
+                    variant="h6" 
+                    fontWeight={700} 
+                    gutterBottom 
+                    sx={{ 
+                      color: '#fff',
+                      mb: 2
+                    }}
+                  >
                     {f.title}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: '#64748b', lineHeight: 1.6 }}>
+                  <Typography 
+                    variant="body2" 
+                    sx={{ 
+                      color: alpha('#fff', 0.7),
+                      lineHeight: 1.6,
+                      flex: 1 // This helps with content alignment
+                    }}
+                  >
                     {f.desc}
                   </Typography>
                 </FeatureItem>
