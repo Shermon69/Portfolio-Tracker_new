@@ -36,17 +36,36 @@ import {
   NotificationsActive,
   Menu as MenuIcon,
   Close as CloseIcon,
-  Insights, // Placeholder icon
-  VerifiedUser, // Placeholder icon
-  Assessment, // Icon for "Portfolio Tracker"
-  AdminPanelSettings, // Icon for "Secure and Private"
-  Devices, // Icon for "Multi-Device Access"
+  Insights,
+  VerifiedUser,
+  Assessment,
+  AdminPanelSettings,
+  Devices,
+  LightbulbOutlined,
+  Groups,
 } from "@mui/icons-material";
 import { Fade, Slide as RevealSlide } from "react-awesome-reveal";
 
+import "./LandingPage.css";
 
-// --- Data (Simulating import from a data file) ---
+/* ------------------------- Full-width container helper ------------------------- */
+/** Full-bleed container with responsive side padding (design-only) */
+const FullWidth = ({ children, ...rest }) => (
+  <Container
+    maxWidth={false}
+    disableGutters
+    sx={{
+      px: { xs: 2, sm: 4, md: 6, lg: 10, xl: 14 },
+      mx: "auto",
+      width: "100%",
+    }}
+    {...rest}
+  >
+    {children}
+  </Container>
+);
 
+/* ----------------------------- Data (unchanged) ---------------------------- */
 const navItems = [
   { label: "Features", href: "#features" },
   { label: "How It Works", href: "#how-it-works" },
@@ -55,237 +74,214 @@ const navItems = [
 ];
 
 const features = [
-  {
-    icon: <UploadFile />,
-    title: "Seamless Import",
-    description: "Easily import your investment data from various brokers via CSV or direct integration (coming soon).",
-  },
-  {
-    icon: <TrendingUp />,
-    title: "Performance Insights",
-    description: "Track your portfolio's growth, ROI, and performance metrics with interactive charts.",
-  },
-  {
-    icon: <ShowChart />,
-    title: "Advanced Analytics",
-    description: "Dive deep into your asset allocation, diversification, and risk exposure with powerful tools.",
-  },
-  {
-    icon: <Security />,
-    title: "Bank-Grade Security",
-    description: "Your data is encrypted and securely stored, ensuring privacy and peace of mind.",
-  },
+  { icon: <UploadFile />, title: "Seamless Import", description: "Easily import your investment data from various brokers via CSV or direct integration (coming soon)." },
+  { icon: <TrendingUp />, title: "Performance Insights", description: "Track your portfolio's growth, ROI, and performance metrics with interactive charts." },
+  { icon: <ShowChart />, title: "Advanced Analytics", description: "Dive deep into your asset allocation, diversification, and risk exposure with powerful tools." },
+  { icon: <Security />, title: "Bank-Grade Security", description: "Your data is encrypted and securely stored, ensuring privacy and peace of mind." },
 ];
 
-// Data from the new FeaturesPage content
 const visualFeatures = [
-  {
-    title: "Best Portfolio Tracker",
-    description: "Stay on top of your investments with real-time insights and analytics.",
-    icon: <Assessment sx={{ fontSize: 80 }} />,
-  },
-  {
-    title: "Secure and Private",
-    description: "Your data is encrypted and protected with top-grade security.",
-    icon: <AdminPanelSettings sx={{ fontSize: 80 }} />,
-  },
-  {
-    title: "Multi-Device Access",
-    description: "Use the app on desktop, tablet, or mobile – synced across all.",
-    icon: <Devices sx={{ fontSize: 80 }} />,
-  },
+  { title: "Best Portfolio Tracker", description: "Track your portfolio and make decisions with live data insights", icon: <Assessment sx={{ fontSize: 80 }} /> },
+  { title: "Secure and Private", description: "Your data is encrypted and protected with top-grade security.", icon: <AdminPanelSettings sx={{ fontSize: 80 }} /> },
+  { title: "Multi-Device Access", description: "Use the app on desktop, tablet, or mobile – synced across all.", icon: <Devices sx={{ fontSize: 80 }} /> },
 ];
-
 
 const howItWorksSteps = [
-  {
-    icon: <AccountBalanceWallet />,
-    title: "Connect Your Accounts",
-    description: "Link your brokerage accounts or upload your data in minutes.",
-  },
-  {
-    icon: <BarChart />,
-    title: "Visualize Your Portfolio",
-    description: "See all your investments in one clear, consolidated dashboard.",
-  },
-  {
-    icon: <NotificationsActive />,
-    title: "Stay Informed",
-    description: "Get insights, track goals, and make smarter investment decisions.",
-  },
+  { icon: <AccountBalanceWallet />, title: "Connect Your Accounts", description: "Link your brokerage accounts or upload your data in minutes." },
+  { icon: <BarChart />, title: "Visualize Your Portfolio", description: "See all your investments in one clear, consolidated dashboard." },
+  { icon: <NotificationsActive />, title: "Stay Informed", description: "Get insights, track goals, and make smarter investment decisions." },
 ];
 
 const pricingData = {
   monthly: [
-    {
-      title: "Free", price: "$0", subtitle: "Perfect for getting started",
-      features: ["1 Portfolio", "Basic Performance Tracking", "Limited Analytics", "Email Support", "Export to CSV"],
-      popular: false,
-    },
-    {
-      title: "Premium", price: "$29", subtitle: "For serious investors",
-      features: ["Unlimited Portfolios", "Advanced Analytics", "Real-time Alerts", "Priority Support", "Custom Reports", "API Access"],
-      popular: true,
-    },
+    { title: "Free", price: "$0", subtitle: "Perfect for getting started", features: ["1 Portfolio","Basic Performance Tracking","Limited Analytics","Email Support","Export to CSV"], popular: false },
+    { title: "Premium", price: "$29", subtitle: "For serious investors", features: ["Unlimited Portfolios","Advanced Analytics","Real-time Alerts","Priority Support","Custom Reports","API Access"], popular: true },
   ],
   yearly: [
-    {
-      title: "Free", price: "$0", subtitle: "Perfect for getting started",
-      features: ["1 Portfolio", "Basic Performance Tracking", "Limited Analytics", "Email Support", "Export to CSV"],
-      popular: false,
-    },
-    {
-      title: "Premium", price: "$290", subtitle: "For serious investors", originalPrice: "$348",
-      features: ["Unlimited Portfolios", "Advanced Analytics", "Real-time Alerts", "Priority Support", "Custom Reports", "API Access"],
-      popular: true,
-    },
+    { title: "Free", price: "$0", subtitle: "Perfect for getting started", features: ["1 Portfolio","Basic Performance Tracking","Limited Analytics","Email Support","Export to CSV"], popular: false },
+    { title: "Premium", price: "$290", originalPrice: "$348", subtitle: "For serious investors", features: ["Unlimited Portfolios","Advanced Analytics","Real-time Alerts","Priority Support","Custom Reports","API Access"], popular: true },
   ],
 };
 
 const whyTrustUsItems = [
-    {
-        icon: <CheckCircleOutline color="primary" />,
-        primary: "Holistic View",
-        secondary: "Consolidate all your investments from different brokers into one comprehensive dashboard.",
-    },
-    {
-        icon: <CheckCircleOutline color="primary" />,
-        primary: "Actionable Insights",
-        secondary: "Go beyond simple tracking with analytics that help you understand performance drivers.",
-    },
-    {
-        icon: <CheckCircleOutline color="primary" />,
-        primary: "User-Centric Design",
-        secondary: "An intuitive and easy-to-navigate platform designed for investors of all levels.",
-    },
-    {
-        icon: <CheckCircleOutline color="primary" />,
-        primary: "Dedicated Support",
-        secondary: "Our team is here to help you get the most out of our platform.",
-    },
+  { icon: <CheckCircleOutline color="primary" />, primary: "Holistic View", secondary: "Consolidate all your investments from different brokers into one comprehensive dashboard." },
+  { icon: <CheckCircleOutline color="primary" />, primary: "Actionable Insights", secondary: "Go beyond simple tracking with analytics that help you understand performance drivers." },
+  { icon: <CheckCircleOutline color="primary" />, primary: "User-Centric Design", secondary: "An intuitive and easy-to-navigate platform designed for investors of all levels." },
+  { icon: <CheckCircleOutline color="primary" />, primary: "Dedicated Support", secondary: "Our team is here to help you get the most out of our platform." },
 ];
 
-// --- Common Styled Components ---
-
+/* ----------------------------- Shared components --------------------------- */
 const SectionTitle = styled(Typography)(({ theme }) => ({
-  marginBottom: theme.spacing(2), // Adjusted margin for sections with subtitles
-  fontWeight: "bold",
-  color: theme.palette.text.primary,
+  marginBottom: theme.spacing(2),
+  fontWeight: 800,
   position: "relative",
   display: "inline-block",
+  color: theme.palette.text.primary, // Explicit color
   "&::after": {
     content: '""',
     position: "absolute",
     bottom: -theme.spacing(1.5),
     left: "50%",
     transform: "translateX(-50%)",
-    width: "60px",
-    height: "4px",
-    backgroundColor: theme.palette.primary.main,
+    width: 60,
+    height: 4,
+    background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
     borderRadius: theme.shape.borderRadius,
+    opacity: 0.9,
   },
 }));
 
 const SectionSubtitle = styled(Typography)(({ theme }) => ({
-    maxWidth: 600,
-    margin: '0 auto',
-    paddingBottom: theme.spacing(6),
-    color: theme.palette.text.secondary,
+  maxWidth: 700,
+  margin: "0 auto",
+  paddingBottom: theme.spacing(6),
+  opacity: 0.9,
+  color: theme.palette.text.secondary, // Explicit color
+  fontWeight: 400,
 }));
 
-
 const HeroButton = styled(Button)(({ theme }) => ({
-  padding: theme.spacing(1.5, 6),
-  borderRadius: theme.shape.borderRadius * 5,
-  fontWeight: 700,
-  fontSize: "1.1rem",
+  padding: theme.spacing(1.6, 5),
+  borderRadius: 999,
+  fontWeight: 800,
+  fontSize: "1.05rem",
   margin: theme.spacing(1),
   textTransform: "none",
-  boxShadow: `0 4px 15px 0 ${alpha(theme.palette.common.black, 0.05)}`,
-  transition: "all 0.3s ease-in-out",
-  "&:hover": {
-    transform: "translateY(-3px)",
-    boxShadow: `0 6px 20px 0 ${alpha(theme.palette.common.black, 0.1)}`,
+  boxShadow: `0 10px 25px ${alpha(theme.palette.primary.main, 0.25)}`,
+  transition: "all 0.3s ease",
+  "&:hover": { 
+    transform: "translateY(-2px)",
+    boxShadow: `0 15px 35px ${alpha(theme.palette.primary.main, 0.35)}`,
   },
 }));
 
-// --- Section-Specific Components ---
+/* ------------------------------- Navigation ------------------------------- */
+const StyledAppBar = styled(AppBar)(() => ({
+  backgroundColor: "#000",
+  borderBottom: `1px solid rgba(255,255,255,0.08)`,
+  boxShadow: "none",
+  backdropFilter: "blur(10px)",
+}));
 
-// Navigation Bar Component
-const StyledAppBar = styled(AppBar)(({ theme, scrolled }) => ({
-  backgroundColor: scrolled ? alpha(theme.palette.background.paper, 0.95) : "transparent",
-  backdropFilter: scrolled ? "blur(20px)" : "none",
-  borderBottom: scrolled ? `1px solid ${theme.palette.divider}` : "none",
-  boxShadow: scrolled ? theme.shadows[1] : "none",
-  transition: "all 0.3s ease-in-out",
-}));
 const NavButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.text.primary,
+  color: "#fff",
   textTransform: "none",
-  fontWeight: 500,
-  padding: theme.spacing(1, 2),
-  borderRadius: theme.shape.borderRadius * 2,
-  transition: "all 0.2s ease-in-out",
-  "&:hover": { backgroundColor: alpha(theme.palette.primary.main, 0.08), color: theme.palette.primary.main },
+  fontWeight: 600,
+  padding: theme.spacing(1, 1.5),
+  borderRadius: 10,
+  transition: "all 0.2s ease",
+  "&:hover": { 
+    backgroundColor: alpha("#fff", 0.08),
+    transform: "translateY(-1px)",
+  },
 }));
-const LogoText = styled(Typography)(({ theme }) => ({
-  fontWeight: "bold",
-  background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-  backgroundClip: "text",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
+
+const LogoText = styled(Typography)(() => ({
+  color: "#fff",
+  fontWeight: 900,
+  letterSpacing: -0.5,
   cursor: "pointer",
+  transition: "opacity 0.2s ease",
+  textDecoration: 'none', // Add this line
+  "&:hover": { 
+    opacity: 0.8,
+    textDecoration: 'none', // Also remove on hover
+  },
 }));
+
 const MobileDrawer = styled(Drawer)(({ theme }) => ({
-  "& .MuiDrawer-paper": { width: 280, backgroundColor: theme.palette.background.paper, padding: theme.spacing(2) },
+  "& .MuiDrawer-paper": { 
+    width: 280, 
+    backgroundColor: theme.palette.background.paper, 
+    padding: theme.spacing(2),
+    background: theme.palette.background.default,
+  },
 }));
+
 function HideOnScroll({ children }) {
   const trigger = useScrollTrigger();
-  return <Slide appear={false} direction="down" in={!trigger}>{children}</Slide>;
+  return (
+    <Slide appear={false} direction="down" in={!trigger}>
+      {children}
+    </Slide>
+  );
 }
 
 const NavigationBar = () => {
-  const theme = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
   const renderNavButton = (item) => {
-      const isAnchor = item.href.startsWith("#");
-      return (
-          <NavButton
-              key={item.label}
-              component={isAnchor ? 'a' : RouterLink}
-              href={isAnchor ? item.href : undefined}
-              to={isAnchor ? undefined : item.href}
-          >
-              {item.label}
-          </NavButton>
-      );
+    const isAnchor = item.href.startsWith("#");
+    return (
+      <NavButton
+        key={item.label}
+        component={isAnchor ? "a" : RouterLink}
+        href={isAnchor ? item.href : undefined}
+        to={isAnchor ? undefined : item.href}
+        size="small"
+      >
+        {item.label}
+      </NavButton>
+    );
   };
 
   const drawer = (
     <Box>
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3 }}>
-        <LogoText variant="h5">InvestTracker</LogoText>
-        <IconButton onClick={handleDrawerToggle} edge="end"><CloseIcon /></IconButton>
+        <LogoText variant="h5">Portfolio Tracker</LogoText>
+        <IconButton onClick={handleDrawerToggle} edge="end">
+          <CloseIcon />
+        </IconButton>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
         {navItems.map((item) => (
-          <Button key={item.label} component={item.href.startsWith("#") ? 'a' : RouterLink} to={item.href} href={item.href} fullWidth onClick={handleDrawerToggle} sx={{ justifyContent: "flex-start", textTransform: "none", py: 1.5, color: "text.primary", "&:hover": { backgroundColor: alpha(theme.palette.primary.main, 0.08), color: theme.palette.primary.main, } }}>
+          <Button
+            key={item.label}
+            component={item.href.startsWith("#") ? "a" : RouterLink}
+            to={item.href}
+            href={item.href}
+            fullWidth
+            onClick={handleDrawerToggle}
+            sx={{ 
+              justifyContent: "flex-start", 
+              textTransform: "none", 
+              py: 1.5,
+              color: 'text.primary',
+              fontWeight: 600,
+            }}
+          >
             {item.label}
           </Button>
         ))}
         <Box sx={{ mt: 3, display: "flex", flexDirection: "column", gap: 1 }}>
-          <Button component={RouterLink} to="/login" variant="outlined" fullWidth sx={{ textTransform: "none", py: 1.5 }}>Sign In</Button>
-          <Button component={RouterLink} to="/signup" variant="contained" fullWidth sx={{ textTransform: "none", py: 1.5 }}>Get Started</Button>
+          <Button 
+            component={RouterLink} 
+            to="/login" 
+            variant="outlined" 
+            fullWidth 
+            sx={{ 
+              textTransform: "none", 
+              py: 1.5,
+              borderColor: 'divider',
+              color: 'text.primary',
+            }}
+          >
+            Sign In
+          </Button>
+          <Button 
+            component={RouterLink} 
+            to="/signup" 
+            variant="contained" 
+            fullWidth 
+            sx={{ 
+              textTransform: "none", 
+              py: 1.5,
+              background: 'linear-gradient(135deg, #3B82F6, #1D4ED8)',
+            }}
+          >
+            Get Started
+          </Button>
         </Box>
       </Box>
     </Box>
@@ -294,385 +290,837 @@ const NavigationBar = () => {
   return (
     <>
       <HideOnScroll>
-        <StyledAppBar position="fixed" elevation={0} scrolled={scrolled}>
-          <Container maxWidth="lg">
+        <StyledAppBar position="fixed" elevation={0}>
+          <FullWidth>
             <Toolbar sx={{ justifyContent: "space-between", py: 1 }}>
-              <LogoText variant="h5" component={RouterLink} to="/">InvestTracker</LogoText>
-              <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
+              <LogoText variant="h6" component={RouterLink} to="/">
+                Portfolio Tracker
+              </LogoText>
+              <Box sx={{ display: { xs: "none", md: "flex" }, gap: 0.5 }}>
                 {navItems.map(renderNavButton)}
               </Box>
               <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
-                <Button component={RouterLink} to="/login" sx={{ textTransform: "none", color: "text.primary", "&:hover": { backgroundColor: alpha(theme.palette.primary.main, 0.08) } }}>Sign In</Button>
-                <Button component={RouterLink} to="/signup" variant="contained" sx={{ textTransform: "none", borderRadius: theme.shape.borderRadius * 2, px: 3 }}>Get Started</Button>
+                <Button
+                  component={RouterLink}
+                  to="/login"
+                  sx={{ 
+                    textTransform: "none", 
+                    borderRadius: 2, 
+                    color: "#fff", 
+                    borderColor: alpha("#fff", 0.4),
+                    fontWeight: 600,
+                  }}
+                  variant="outlined"
+                >
+                  Sign In
+                </Button>
+                <Button
+                  component={RouterLink}
+                  to="/signup"
+                  variant="contained"
+                  sx={{ 
+                    textTransform: "none", 
+                    borderRadius: 999, 
+                    px: 2.5,
+                    background: 'linear-gradient(135deg, #3B82F6, #1D4ED8)',
+                    fontWeight: 700,
+                  }}
+                >
+                  Get Started
+                </Button>
               </Box>
-              <IconButton color="inherit" aria-label="open drawer" edge="end" onClick={handleDrawerToggle} sx={{ display: { md: "none" }, color: "text.primary" }}><MenuIcon /></IconButton>
+              <IconButton 
+                color="inherit" 
+                aria-label="open drawer" 
+                edge="end" 
+                onClick={handleDrawerToggle} 
+                sx={{ display: { md: "none" }, color: "#fff" }}
+              >
+                <MenuIcon />
+              </IconButton>
             </Toolbar>
-          </Container>
+          </FullWidth>
         </StyledAppBar>
       </HideOnScroll>
-      <MobileDrawer variant="temporary" anchor="right" open={mobileOpen} onClose={handleDrawerToggle} ModalProps={{ keepMounted: true }}>{drawer}</MobileDrawer>
+
+      <MobileDrawer 
+        variant="temporary" 
+        anchor="right" 
+        open={mobileOpen} 
+        onClose={handleDrawerToggle} 
+        ModalProps={{ keepMounted: true }}
+      >
+        {drawer}
+      </MobileDrawer>
     </>
   );
 };
 
-// Hero Section Component
-const HeroContainer = styled(Box)(({ theme }) => ({
-  background: theme.palette.background.default,
-  color: theme.palette.text.primary,
-  paddingTop: theme.spacing(20),
-  paddingBottom: theme.spacing(15),
+/* ----------------------------------- Hero ---------------------------------- */
+const HeroContainer = styled(Box)(() => ({
+  backgroundColor: "#000",
+  color: "#fff",
+  paddingTop: 100, // Reduced from 120
+  paddingBottom: 80, // Reduced from 120
+  minHeight: "80vh", // Changed from calc(100vh - 64px) to reduce height
   position: "relative",
   overflow: "hidden",
+  background: `
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(120, 119, 198, 0.15), transparent),
+    linear-gradient(180deg, #000 0%, #000 100%)
+  `,
 }));
 
 const Hero = () => {
-    const theme = useTheme();
-    return (
-        <HeroContainer id="hero">
-        <Container maxWidth="lg">
-            <Grid container spacing={5} alignItems="center">
-            <Grid item xs={12} md={6}>
-                <RevealSlide direction="left" triggerOnce>
-                <Typography variant="h2" component="h1" gutterBottom fontWeight="bold" color="text.primary" sx={{ mb: 2, lineHeight: 1.2 }}>
-                    Your Financial Future,
-                    <Box component="span" sx={{ color: theme.palette.secondary.light, display: "block" }}>
-                    Clearly Visualized.
-                    </Box>
-                </Typography>
-                <Typography variant="h5" paragraph color="text.secondary" sx={{ mb: 4, opacity: 0.9 }}>
-                    Take control of your investments. Monitor performance, analyze strategies, and achieve your financial goals with our intuitive platform.
-                </Typography>
-                <Box>
-                    <HeroButton variant="contained" color="secondary" size="large" component={RouterLink} to="/signup" endIcon={<ArrowForward />}>Get Started Free</HeroButton>
-                    <HeroButton variant="outlined" color="primary" size="large" component={RouterLink} to="/login" sx={{ "&:hover": { backgroundColor: alpha(theme.palette.primary.main, 0.08) } }}>Sign In</HeroButton>
+  return (
+    <HeroContainer id="hero" className="lp-hero lp-hero--dark">
+      <FullWidth>
+        <Grid container spacing={6} alignItems="center" justifyContent="center">
+          <Grid item xs={12} md={10}>
+            <RevealSlide direction="up" triggerOnce>
+              <Typography
+                variant="h2"
+                component="h1"
+                align="center"
+                sx={{ 
+                  mb: 2, 
+                  lineHeight: 1.15, 
+                  fontWeight: 900, 
+                  letterSpacing: -0.5,
+                  background: 'linear-gradient(135deg, #fff 0%, #a5b4fc 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  color: 'transparent',
+                }}
+              >
+                Your Financial Future,
+                <Box component="span" sx={{ display: "block" }}>
+                  Clearly Visualized.
                 </Box>
-                </RevealSlide>
-            </Grid>
-            <Grid item xs={12} md={6}>
-                <RevealSlide direction="right" triggerOnce>
-                <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", position: "relative", mt: { xs: 4, md: 0 } }}>
-                    <Insights sx={{ fontSize: { xs: 200, sm: 300, md: 400 }, color: alpha(theme.palette.primary.main, 0.2) }} />
-                </Box>
-                </RevealSlide>
-            </Grid>
-            </Grid>
-        </Container>
-        </HeroContainer>
-    );
+              </Typography>
+
+              <Typography 
+                variant="h6" 
+                align="center" 
+                sx={{ 
+                  mb: 3, 
+                  opacity: 0.9, 
+                  color: alpha("#fff", 0.85),
+                  fontWeight: 400,
+                  lineHeight: 1.6,
+                }}
+              >
+                Take control of your investments. Monitor performance, analyze strategies, and achieve your
+                financial goals with our intuitive platform.
+              </Typography>
+
+              <Box sx={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}>
+                <HeroButton 
+                  variant="contained" 
+                  color="primary" 
+                  size="large" 
+                  component={RouterLink} 
+                  to="/signup" 
+                  endIcon={<ArrowForward />}
+                  sx={{
+                    background: 'linear-gradient(135deg, #3B82F6, #1D4ED8)',
+                  }}
+                >
+                  Get Started Free
+                </HeroButton>
+                <HeroButton
+                  variant="outlined"
+                  size="large"
+                  component={RouterLink}
+                  to="/login"
+                  sx={{ 
+                    color: "#fff", 
+                    borderColor: alpha("#fff", 0.4),
+                    "&:hover": {
+                      borderColor: alpha("#fff", 0.8),
+                      backgroundColor: alpha("#fff", 0.1),
+                    }
+                  }}
+                >
+                  Learn More
+                </HeroButton>
+              </Box>
+            </RevealSlide>
+          </Grid>
+        </Grid>
+      </FullWidth>
+    </HeroContainer>
+  );
 };
 
-// Features Section Component
+/* ------------------------------- Features row ------------------------------ */
 const FeatureItem = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(4), textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start",
-  borderRadius: theme.shape.borderRadius * 2,
-  backgroundColor: theme.palette.mode === "dark" ? alpha(theme.palette.common.white, 0.02) : theme.palette.background.paper,
-  border: `1px solid ${theme.palette.divider}`,
-  transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out",
-  height: '100%',
-  "&:hover": { transform: "translateY(-8px)", boxShadow: theme.shadows[theme.palette.mode === "dark" ? 6 : 10], borderColor: theme.palette.primary.main },
-}));
-const FeatureIconWrapper = styled(Avatar)(({ theme }) => ({
-  backgroundColor: alpha(theme.palette.primary.main, 0.1), color: theme.palette.primary.main,
-  width: theme.spacing(8), height: theme.spacing(8), marginBottom: theme.spacing(2.5),
-  "& .MuiSvgIcon-root": { fontSize: theme.spacing(4.5) },
+  padding: theme.spacing(4),
+  textAlign: "center",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  height: "100%", // Ensure full height
+  minHeight: 280, // Add minimum height for consistency
+  justifyContent: "flex-start",
+  borderRadius: 20,
+  backgroundColor: "#1a1a2e", // Dark background
+  border: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
+  transition: "all 0.3s ease",
+  boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.05)}`,
+  "&:hover": {
+    transform: "translateY(-8px)",
+    boxShadow: `0 20px 40px ${alpha(theme.palette.common.black, 0.15)}`,
+    borderColor: alpha(theme.palette.primary.main, 0.2),
+  },
 }));
 
-const FeaturesSection = () => (
-    <Box id="features" sx={{ py: 10 }}>
-        <Container maxWidth="lg">
+const IconTile = styled("div")(({ theme, bg }) => ({
+  width: 70,
+  height: 70,
+  borderRadius: 20,
+  display: "grid",
+  placeItems: "center",
+  marginBottom: theme.spacing(3),
+  background: bg,
+  color: "#fff",
+  "& .MuiSvgIcon-root": { fontSize: 34 },
+  boxShadow: `0 8px 20px ${alpha(theme.palette.common.black, 0.15)}`,
+}));
+
+const FeaturesSection = () => {
+  const marketing = [
+    { 
+      icon: <TrendingUp />, 
+      title: "Portfolio Analysis", 
+      desc: "Track your allocation and analyze performance using sophisticated algorithms.", 
+      bg: "linear-gradient(135deg,#3B82F6,#1D4ED8)" 
+    },
+    { 
+      icon: <BarChart />, 
+      title: "Market Insights", 
+      desc: "Enhance portfolio growth with our data analytics and performance tracking.", 
+      bg: "linear-gradient(135deg,#A78BFA,#7C3AED)" 
+    },
+    { 
+      icon: <LightbulbOutlined />, 
+      title: "Smart Recommendations", 
+      desc: "Effectively shape new market strategies using data-driven investment insights.", 
+      bg: "linear-gradient(135deg,#34D399,#059669)" 
+    },
+    { 
+      icon: <Groups />, 
+      title: "Community Insights", 
+      desc: "Leverage social conversations and community-driven ideas to improve returns.", 
+      bg: "linear-gradient(135deg,#FB923C,#F97316)" 
+    },
+  ];
+
+  return (
+    <Box id="features" sx={{ py: 12, backgroundColor: "#f8fafc" }}>
+      <FullWidth>
         <Fade direction="up" triggerOnce>
-            <SectionTitle variant="h3" component="h2" align="center" sx={{ mb: 6 }}>Unlock Powerful Investment Tools</SectionTitle>
+          <Box textAlign="center" sx={{ mb: 8 }}>
+            <SectionTitle variant="h3" component="h2" sx={{ color: '#1e293b' }}>
+              Unlock Powerful Investment Tools
+            </SectionTitle>
+            <SectionSubtitle variant="h6" sx={{ color: '#64748b' }}>
+              Everything you need to track, analyze, and improve your portfolio.
+            </SectionSubtitle>
+          </Box>
         </Fade>
-        <Box sx={{ display: "grid", gap: 4, justifyContent: "center", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))" }}>
-            {features.map((feature, index) => (
-            <Fade key={feature.title} direction="up" delay={index * 100} triggerOnce>
-                <FeatureItem elevation={0}>
-                <FeatureIconWrapper>{feature.icon}</FeatureIconWrapper>
-                <Typography variant="h6" component="h3" gutterBottom fontWeight="medium" color="text.primary">{feature.title}</Typography>
-                <Typography variant="body2" color="text.secondary">{feature.description}</Typography>
-                </FeatureItem>
-            </Fade>
-            ))}
-        </Box>
-        </Container>
-    </Box>
-);
 
-// --- NEW --- Visual Features Section (from FeaturesPage)
+        {/* Added container div for better centering */}
+        <Box sx={{ 
+          maxWidth: 'lg',
+          mx: 'auto', // Center the container
+          px: { xs: 2, sm: 4 } // Add some padding on smaller screens
+        }}>
+          <Grid 
+            container 
+            spacing={4} 
+            alignItems="stretch"
+            justifyContent="center" // Center the grid items
+          >
+            {marketing.map((f, i) => (
+              <Grid 
+                item 
+                xs={12} 
+                sm={6} 
+                md={3} 
+                key={f.title}
+                sx={{ 
+                  display: 'flex',
+                  justifyContent: 'center' // Center each grid item
+                }}
+              >
+                <Fade direction="up" delay={i * 120} triggerOnce>
+                  <FeatureItem 
+                    elevation={0} 
+                    className="lp-card"
+                    sx={{ 
+                      width: '100%', // Ensure full width within grid
+                      maxWidth: 340 // Limit maximum width
+                    }}
+                  >
+                    <IconTile bg={f.bg}>{f.icon}</IconTile>
+                    <Typography 
+                      variant="h6" 
+                      fontWeight={700} 
+                      gutterBottom 
+                      sx={{ 
+                        color: '#fff',
+                        mb: 2
+                      }}
+                    >
+                      {f.title}
+                    </Typography>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        color: alpha('#fff', 0.7),
+                        lineHeight: 1.6,
+                        flex: 1
+                      }}
+                    >
+                      {f.desc}
+                    </Typography>
+                  </FeatureItem>
+                </Fade>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </FullWidth>
+    </Box>
+  );
+};
+
+/* ----------------------------- Visual features ----------------------------- */
 const VisualFeatureCard = styled(Card)(({ theme }) => ({
-    textAlign: 'center',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    border: `1px solid ${theme.palette.divider}`,
-    borderRadius: theme.shape.borderRadius * 2,
-    transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-    '&:hover': {
-        transform: 'translateY(-8px)',
-        boxShadow: theme.shadows[theme.palette.mode === "dark" ? 6 : 10],
-    }
+  textAlign: "center",
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  border: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
+  borderRadius: 20,
+  transition: "all 0.3s ease",
+  backgroundColor: "#1a1a2e",  // Added dark background
+  boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.05)}`,
+  "&:hover": { 
+    transform: "translateY(-8px)", 
+    boxShadow: `0 20px 40px ${alpha(theme.palette.common.black, 0.15)}`,
+  },
 }));
 
 const VisualFeaturesSection = () => {
-    const theme = useTheme();
-    return (
-        <Box sx={{ py: 10, bgcolor: 'background.paper' }}>
-            <Container maxWidth="lg">
-                <Box textAlign="center">
-                    <Fade direction="up" triggerOnce>
-                        <SectionTitle variant="h3" component="h2">
-                            Explore Our Powerful Features
-                        </SectionTitle>
-                        <SectionSubtitle variant="h6">
-                            Discover how we help you grow and manage your portfolio efficiently.
-                        </SectionSubtitle>
-                    </Fade>
-                </Box>
-                <Grid container spacing={4}>
-                    {visualFeatures.map((feature, index) => (
-                        <Grid item xs={12} md={4} key={index}>
-                            <Fade direction="up" delay={index * 150} triggerOnce>
-                                <VisualFeatureCard elevation={0}>
-                                    <Box sx={{ 
-                                        color: 'primary.main', 
-                                        pt: 5, 
-                                        pb: 3, 
-                                        bgcolor: alpha(theme.palette.primary.main, 0.05) 
-                                    }}>
-                                        {feature.icon}
-                                    </Box>
-                                    <CardContent sx={{ p: 3, flexGrow: 1 }}>
-                                        <Typography variant="h5" component="h3" fontWeight="bold" gutterBottom>
-                                            {feature.title}
-                                        </Typography>
-                                        <Typography color="text.secondary">
-                                            {feature.description}
-                                        </Typography>
-                                    </CardContent>
-                                </VisualFeatureCard>
-                            </Fade>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Container>
+  const theme = useTheme();
+  return (
+    <Box sx={{ py: 12, backgroundColor: "#ffffff" }}>
+      <FullWidth>
+        <Box textAlign="center">
+          <Fade direction="up" triggerOnce>
+            <SectionTitle variant="h3" component="h2" sx={{ color: '#1e293b' }}>
+              Explore Our Powerful Features
+            </SectionTitle>
+            <SectionSubtitle variant="h6" sx={{ color: '#64748b' }}>
+              Discover how we help you grow and manage your portfolio efficiently.
+            </SectionSubtitle>
+          </Fade>
         </Box>
-    );
+        <Grid container spacing={4}>
+          {visualFeatures.map((feature, index) => (
+            <Grid item xs={12} md={4} key={index}>
+              <Fade direction="up" delay={index * 150} triggerOnce>
+                <VisualFeatureCard elevation={0} className="lp-card">
+                  <Box
+                    sx={{
+                      color: "primary.main",
+                      pt: 5,
+                      pb: 3,
+                      bgcolor: alpha(theme.palette.primary.main, 0.04),
+                      borderTopLeftRadius: 20,
+                      borderTopRightRadius: 20,
+                    }}
+                  >
+                    {feature.icon}
+                  </Box>
+                  <CardContent sx={{ p: 4, flexGrow: 1 }}>
+                    <Typography 
+                        variant="h5" 
+                        component="h3" 
+                        fontWeight={800} 
+                        gutterBottom 
+                        sx={{ color: '#ffffff' }}  // Changed from '#1e293b' to white
+                    >
+                        {feature.title}
+                    </Typography>
+                    <Typography sx={{ color: '#64748b', lineHeight: 1.6 }}>
+                      {feature.description}
+                    </Typography>
+                  </CardContent>
+                </VisualFeatureCard>
+              </Fade>
+            </Grid>
+          ))}
+        </Grid>
+      </FullWidth>
+    </Box>
+  );
 };
 
+/* ------------------------------ How it works ------------------------------- */
+const StepWrap = styled(Box)(({ theme }) => ({
+  textAlign: "center",
+  padding: theme.spacing(3),
+}));
 
-// How It Works Section
-const HowItWorksStep = styled(Box)(({ theme }) => ({
-  textAlign: "center", padding: theme.spacing(3),
-  "& .MuiSvgIcon-root": { fontSize: theme.spacing(7), color: theme.palette.secondary.main, marginBottom: theme.spacing(2) },
+const NumberBadge = styled("div")(({ theme, color }) => ({
+  width: 80,
+  height: 80,
+  borderRadius: "50%",
+  display: "grid",
+  placeItems: "center",
+  margin: "0 auto 16px",
+  fontSize: "1.25rem",
+  fontWeight: 900,
+  background: color,
+  color: "#fff",
+  boxShadow: `0 8px 20px ${alpha(theme.palette.common.black, 0.2)}`,
+}));
+
+const IconBadge = styled("div")(({ theme }) => ({
+  width: 50,
+  height: 50,
+  borderRadius: 14,
+  display: "grid",
+  placeItems: "center",
+  margin: "0 auto 14px",
+  background: alpha("#fff", 0.12),
+  "& .MuiSvgIcon-root": { fontSize: 28, color: "#fff" },
 }));
 
 const HowItWorksSection = () => {
-    const theme = useTheme();
-    return (
-        <Box id="how-it-works" sx={{ py: 10, bgcolor: "background.default" }}>
-            <Container maxWidth="md">
-            <Fade direction="up" triggerOnce>
-                <SectionTitle variant="h3" component="h2" align="center" sx={{ mb: 6 }}>Get Started in 3 Simple Steps</SectionTitle>
-            </Fade>
-            <Grid container spacing={5} justifyContent="center">
-                {howItWorksSteps.map((step, index) => (
-                <Grid item xs={12} sm={4} key={step.title}>
-                    <Fade direction="up" delay={index * 150} triggerOnce>
-                    <HowItWorksStep>
-                        <Box sx={{ width: 40, height: 40, borderRadius: "50%", bgcolor: alpha(theme.palette.primary.main, 0.1), color: theme.palette.primary.main, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px auto", fontSize: "1.2rem", fontWeight: "bold" }}>{index + 1}</Box>
-                        {step.icon}
-                        <Typography variant="h6" component="h3" gutterBottom fontWeight="medium" color="text.primary">{step.title}</Typography>
-                        <Typography variant="body2" color="text.secondary">{step.description}</Typography>
-                    </HowItWorksStep>
-                    </Fade>
-                </Grid>
-                ))}
-            </Grid>
-            </Container>
-        </Box>
-    );
+  return (
+    <Box id="how-it-works" sx={{ py: 12, background: "linear-gradient(135deg, #000 0%, #1a1a2e 100%)", color: "#fff" }}>
+      <FullWidth>
+        <Fade direction="up" triggerOnce>
+          <Box textAlign="center">
+            <SectionTitle variant="h3" component="h2" sx={{ color: "#fff" }}>
+              Get Started in 3 Simple Steps
+            </SectionTitle>
+            <SectionSubtitle variant="h6" sx={{ color: alpha("#fff", 0.8) }}>
+              Connect, visualize, and stay informed—without friction.
+            </SectionSubtitle>
+          </Box>
+        </Fade>
+
+        <Grid container spacing={5} justifyContent="center">
+          {howItWorksSteps.map((step, i) => {
+            const colors = ["#2563EB", "#10B981", "#F97316"];
+            return (
+              <Grid item xs={12} sm={4} key={step.title}>
+                <Fade direction="up" delay={i * 150} triggerOnce>
+                  <StepWrap>
+                    <NumberBadge color={colors[i]}>{i + 1}</NumberBadge>
+                    <IconBadge>{step.icon}</IconBadge>
+                    <Typography variant="h6" component="h3" gutterBottom fontWeight={700} sx={{ color: "#fff" }}>
+                      {step.title}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: alpha("#fff", 0.8), lineHeight: 1.6 }}>
+                      {step.description}
+                    </Typography>
+                  </StepWrap>
+                </Fade>
+              </Grid>
+            );
+          })}
+        </Grid>
+      </FullWidth>
+    </Box>
+  );
 };
 
-// Pricing Section
+/* --------------------------------- Pricing -------------------------------- */
 const PricingCard = styled(Paper)(({ theme, popular }) => ({
-  padding: theme.spacing(4), textAlign: "center", borderRadius: theme.shape.borderRadius * 2,
-  backgroundColor: theme.palette.background.paper, border: popular ? `2px solid ${theme.palette.primary.main}` : `1px solid ${theme.palette.divider}`,
-  position: "relative", transition: "all 0.3s ease-in-out",
-  "&:hover": { transform: "translateY(-8px)", boxShadow: theme.shadows[theme.palette.mode === "dark" ? 8 : 12] },
+  padding: theme.spacing(4),
+  textAlign: "center",
+  borderRadius: 20,
+  backgroundColor: "#1a1a2e", // Changed to dark background
+  border: popular ? `2px solid ${theme.palette.primary.main}` : `1px solid ${alpha(theme.palette.divider, 0.1)}`,
+  position: "relative",
+  transition: "all 0.3s ease-in-out",
+  boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.05)}`,
+  "& .MuiTypography-root": { // Added text color overrides
+    color: "#fff !important"
+  },
+  "& .MuiListItemText-primary": {
+    color: "#fff !important"
+  },
+  "&:hover": { 
+    transform: "translateY(-8px)", 
+    boxShadow: `0 20px 40px ${alpha(theme.palette.common.black, 0.15)}`,
+  },
 }));
+
 const PopularBadge = styled(Box)(({ theme }) => ({
-  position: "absolute", top: -12, left: "50%", transform: "translateX(-50%)",
-  backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText,
-  padding: theme.spacing(0.5, 2), borderRadius: theme.shape.borderRadius * 3,
-  fontSize: "0.75rem", fontWeight: "bold", textTransform: "uppercase",
+  position: "absolute",
+  top: -12,
+  left: "50%",
+  transform: "translateX(-50%)",
+  background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+  color: "#fff",
+  padding: theme.spacing(0.75, 3),
+  borderRadius: 999,
+  fontSize: "0.75rem",
+  fontWeight: 800,
+  textTransform: "uppercase",
+  boxShadow: `0 4px 12px ${alpha(theme.palette.primary.main, 0.3)}`,
 }));
+
 const BillingToggle = styled(Box)(({ theme }) => ({
-  display: "flex", backgroundColor: theme.palette.background.default, // Changed to default
-  border: `1px solid ${theme.palette.divider}`, borderRadius: theme.shape.borderRadius * 3,
-  padding: theme.spacing(0.5), justifyContent: "center",
+  display: "flex",
+  backgroundColor: theme.palette.background.default,
+  border: `1px solid ${theme.palette.divider}`,
+  borderRadius: 999,
+  padding: theme.spacing(0.5),
+  justifyContent: "center",
+  maxWidth: 400,
+  margin: '0 auto',
 }));
+
 const ToggleButton = styled(Button)(({ theme, active }) => ({
-  textTransform: "none", fontWeight: 600, padding: theme.spacing(1, 3),
-  borderRadius: theme.shape.borderRadius * 2.5,
+  textTransform: "none",
+  fontWeight: 700,
+  padding: theme.spacing(1, 3),
+  borderRadius: 999,
   backgroundColor: active ? theme.palette.primary.main : "transparent",
-  color: active ? theme.palette.primary.contrastText : theme.palette.text.primary,
-  "&:hover": { backgroundColor: active ? theme.palette.primary.dark : alpha(theme.palette.primary.main, 0.08) },
+  color: active ? "#fff" : theme.palette.text.primary,
+  transition: "all 0.2s ease",
+  "&:hover": { 
+    backgroundColor: active ? theme.palette.primary.dark : alpha(theme.palette.primary.main, 0.08),
+  },
 }));
 
 const PricingSection = () => {
-    const theme = useTheme();
-    const [billingCycle, setBillingCycle] = useState("monthly");
-
-    return (
-        <Box id="pricing" sx={{ py: 10, bgcolor: "background.paper" }}>
-            <Container maxWidth="lg">
-            <Fade direction="up" triggerOnce>
-                <Box textAlign="center">
-                    <SectionTitle variant="h3" component="h2">Simple, Transparent Pricing</SectionTitle>
-                    <SectionSubtitle variant="h6">
-                        Choose the plan that fits your investment journey. Start free and upgrade as you grow.
-                    </SectionSubtitle>
-                </Box>
-            </Fade>
-
-            <Fade direction="up" delay={100} triggerOnce>
-                <Box sx={{ display: "flex", justifyContent: "center", mb: 6 }}>
-                <BillingToggle>
-                    <ToggleButton active={billingCycle === "monthly"} onClick={() => setBillingCycle("monthly")}>Monthly</ToggleButton>
-                    <ToggleButton active={billingCycle === "yearly"} onClick={() => setBillingCycle("yearly")}>Yearly
-                    <Box component="span" sx={{ ml: 1, px: 1, py: 0.25, bgcolor: "success.main", color: "success.contrastText", borderRadius: 1, fontSize: "0.7rem", fontWeight: "bold" }}>Save 17%</Box>
-                    </ToggleButton>
-                </BillingToggle>
-                </Box>
-            </Fade>
-
-            <Grid container spacing={4} justifyContent="center" alignItems="stretch">
-                {pricingData[billingCycle].map((plan, index) => (
-                <Grid item xs={12} sm={6} md={5} key={plan.title}>
-                    <Fade direction="up" delay={index * 150} triggerOnce>
-                    <PricingCard elevation={0} popular={plan.popular} sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
-                        {plan.popular && <PopularBadge>Most Popular</PopularBadge>}
-                        <Box sx={{ flexGrow: 1}}>
-                            <Typography variant="h5" component="h3" fontWeight="bold" color="text.primary" gutterBottom>{plan.title}</Typography>
-                            <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>{plan.subtitle}</Typography>
-                            <Box sx={{ mb: 4 }}>
-                                <Typography variant="h3" component="div" fontWeight="bold" color="text.primary" sx={{ display: "flex", alignItems: "baseline", justifyContent: "center" }}>
-                                    {plan.price}
-                                    <Typography variant="h6" component="span" color="text.secondary" sx={{ ml: 1 }}>/{billingCycle === "monthly" ? "month" : "year"}</Typography>
-                                </Typography>
-                                {plan.originalPrice && <Typography variant="body2" color="text.secondary" sx={{ textDecoration: "line-through", mt: 0.5 }}>{plan.originalPrice}/year</Typography>}
-                            </Box>
-                            <List sx={{ mb: 4, p:0 }}>
-                            {plan.features.map((feature, i) => (
-                                <ListItem key={i} sx={{ py: 0.5, px: 0 }}>
-                                <ListItemIcon sx={{ minWidth: 32 }}><CheckCircleOutline sx={{ fontSize: 20, color: plan.popular ? "primary.main" : "success.main" }} /></ListItemIcon>
-                                <ListItemText primary={feature} primaryTypographyProps={{ variant: "body2", color: "text.primary" }}/>
-                                </ListItem>
-                            ))}
-                            </List>
-                        </Box>
-                        <Button variant={plan.popular ? "contained" : "outlined"} color="primary" fullWidth size="large" component={RouterLink} to={plan.title === "Free" ? "/signup" : "/signup?plan=premium"}
-                        sx={{ mt: 'auto', textTransform: "none", fontWeight: 600, py: 1.5, borderRadius: theme.shape.borderRadius * 2, ...(plan.popular && { background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`, "&:hover": { background: `linear-gradient(135deg, ${theme.palette.primary.dark}, ${theme.palette.secondary.dark})` } })}}>
-                        {plan.title === "Free" ? "Get Started Free" : "Start Premium Trial"}
-                        </Button>
-                    </PricingCard>
-                    </Fade>
-                </Grid>
-                ))}
-            </Grid>
-
-            <Fade direction="up" delay={300} triggerOnce>
-                <Box sx={{ textAlign: "center", mt: 6 }}>
-                <Typography variant="body2" color="text.secondary">All plans include a 30-day money-back guarantee. No questions asked.</Typography>
-                </Box>
-            </Fade>
-            </Container>
-        </Box>
-    )
-};
-
-// Why Trust Us Section
-const WhyTrustUsSection = () => {
-    const theme = useTheme();
-    return (
-        <Box sx={{ py: 10, bgcolor: "background.default" }}>
-            <Container maxWidth="lg">
-            <Fade direction="up" triggerOnce><SectionTitle variant="h3" component="h2" align="center" sx={{ mb: 6 }}>Why Investors Trust Us</SectionTitle></Fade>
-            <Grid container spacing={4} alignItems="center">
-                <Grid item xs={12} md={6}>
-                    <Fade direction="left" triggerOnce>
-                        <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
-                            <VerifiedUser sx={{ fontSize: { xs: 200, sm: 250, md: 300 }, color: alpha(theme.palette.secondary.main, 0.2) }} />
-                        </Box>
-                    </Fade>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                <Fade direction="right" triggerOnce>
-                    <List>
-                    {whyTrustUsItems.map((item) => (
-                        <ListItem key={item.primary} sx={{ py: 1.5 }}>
-                        <ListItemIcon sx={{ minWidth: 40 }}>{item.icon}</ListItemIcon>
-                        <ListItemText primary={item.primary} secondary={item.secondary} primaryTypographyProps={{ fontWeight: "medium", color: "text.primary" }} secondaryTypographyProps={{ color: "text.secondary" }}/>
-                        </ListItem>
-                    ))}
-                    </List>
-                </Fade>
-                </Grid>
-            </Grid>
-            </Container>
-        </Box>
-    )
-};
-
-// Call To Action Section
-const CallToActionSection = () => (
-    <Box sx={{ py: 10, bgcolor: "background.paper" }}>
-      <Container maxWidth="md" sx={{ textAlign: 'center' }}>
+  const [billingCycle, setBillingCycle] = useState("monthly");
+  return (
+    <Box id="pricing" sx={{ py: 12, backgroundColor: "#f8fafc" }}> {/* Softer background */}
+      <FullWidth>
         <Fade direction="up" triggerOnce>
-          <Typography variant="h3" component="h2" gutterBottom fontWeight="bold" color="text.primary">
-            Ready to Elevate Your Investment Strategy?
-          </Typography>
+          <Box textAlign="center">
+            <SectionTitle variant="h3" component="h2" sx={{ color: '#1e293b' }}>
+              Simple, Transparent Pricing
+            </SectionTitle>
+            <SectionSubtitle variant="h6" sx={{ color: '#64748b' }}>
+              Choose the plan that fits your investment journey. Start free and upgrade as you grow.
+            </SectionSubtitle>
+          </Box>
         </Fade>
+
         <Fade direction="up" delay={100} triggerOnce>
-          <Typography variant="h6" color="text.secondary" paragraph sx={{ mb: 4 }}>
-            Join thousands of investors who are making smarter decisions. Sign up today and take the first step towards financial clarity.
-          </Typography>
+          <Box sx={{ display: "flex", justifyContent: "center", mb: 6 }}>
+            <BillingToggle>
+              <ToggleButton active={billingCycle === "monthly"} onClick={() => setBillingCycle("monthly")}>
+                Monthly
+              </ToggleButton>
+              <ToggleButton active={billingCycle === "yearly"} onClick={() => setBillingCycle("yearly")}>
+                Yearly
+                <Box 
+                  component="span" 
+                  sx={{ 
+                    ml: 1, 
+                    px: 1, 
+                    py: 0.25, 
+                    bgcolor: "success.main", 
+                    color: "#fff", 
+                    borderRadius: 1, 
+                    fontSize: "0.7rem", 
+                    fontWeight: 800 
+                  }}
+                >
+                  Save 17%
+                </Box>
+              </ToggleButton>
+            </BillingToggle>
+          </Box>
         </Fade>
-        <Fade direction="up" delay={200} triggerOnce>
-          <HeroButton variant="contained" color="primary" size="large" component={RouterLink} to="/signup" endIcon={<ArrowForward />}>
-            Start Tracking for Free
-          </HeroButton>
+
+        <Grid container spacing={4} justifyContent="center" alignItems="stretch">
+          {pricingData[billingCycle].map((plan, index) => (
+            <Grid item xs={12} sm={6} md={5} key={plan.title}>
+              <Fade direction="up" delay={index * 150} triggerOnce>
+                <PricingCard 
+                  elevation={0} 
+                  popular={plan.popular} 
+                  className="lp-card" 
+                  sx={{ 
+                    height: "100%", 
+                    display: "flex", 
+                    flexDirection: "column",
+                    borderColor: plan.popular ? 'primary.main' : 'divider',
+                  }}
+                >
+                  {plan.popular && <PopularBadge>Most Popular</PopularBadge>}
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Typography variant="h5" component="h3" fontWeight={900} gutterBottom sx={{ color: '#1e293b' }}>
+                      {plan.title}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: '#64748b', mb: 3 }}>
+                      {plan.subtitle}
+                    </Typography>
+                    <Box sx={{ mb: 3 }}>
+                      <Typography 
+                        variant="h3" 
+                        component="div" 
+                        fontWeight={900} 
+                        sx={{ 
+                          display: "flex", 
+                          alignItems: "baseline", 
+                          justifyContent: "center", 
+                          letterSpacing: -0.5,
+                          color: '#1e293b',
+                        }}
+                      >
+                        {plan.price}
+                        <Typography variant="h6" component="span" sx={{ color: '#64748b', ml: 1 }}>
+                          /{billingCycle === "monthly" ? "month" : "year"}
+                        </Typography>
+                      </Typography>
+                      {plan.originalPrice && (
+                        <Typography variant="body2" sx={{ color: '#64748b', textDecoration: "line-through", mt: 0.5 }}>
+                          {plan.originalPrice}/year
+                        </Typography>
+                      )}
+                    </Box>
+                    <List sx={{ mb: 3, p: 0 }}>
+                      {plan.features.map((feature, i) => (
+                        <ListItem key={i} sx={{ py: 0.5, px: 0 }}>
+                          <ListItemIcon sx={{ minWidth: 32 }}>
+                            <CheckCircleOutline 
+                              sx={{ 
+                                fontSize: 20, 
+                                color: plan.popular ? "primary.main" : "success.main" 
+                              }} 
+                            />
+                          </ListItemIcon>
+                          <ListItemText 
+                            primary={feature} 
+                            primaryTypographyProps={{ 
+                              variant: "body2",
+                              color: '#1e293b',
+                              fontWeight: 500,
+                            }} 
+                          />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Box>
+                  <Button
+                    variant={plan.popular ? "contained" : "outlined"}
+                    color="primary"
+                    fullWidth
+                    size="large"
+                    component={RouterLink}
+                    to={plan.title === "Free" ? "/signup" : "/signup?plan=premium"}
+                    sx={{ 
+                      mt: "auto", 
+                      textTransform: "none", 
+                      fontWeight: 800, 
+                      py: 1.5, 
+                      borderRadius: 999,
+                      background: plan.popular ? 'linear-gradient(135deg, #3B82F6, #1D4ED8)' : 'transparent',
+                      color: plan.popular ? '#fff' : '#1e293b',
+                      borderColor: plan.popular ? 'transparent' : '#cbd5e1',
+                      "&:hover": {
+                        background: plan.popular ? 'linear-gradient(135deg, #1D4ED8, #1E40AF)' : 'rgba(15, 23, 42, 0.04)',
+                      }
+                    }}
+                  >
+                    {plan.title === "Free" ? "Get Started Free" : "Start Premium Trial"}
+                  </Button>
+                </PricingCard>
+              </Fade>
+            </Grid>
+          ))}
+        </Grid>
+
+        <Fade direction="up" delay={300} triggerOnce>
+          <Box sx={{ textAlign: "center", mt: 6 }}>
+            <Typography variant="body2" sx={{ color: '#64748b' }}>
+              All plans include a 30-day money-back guarantee. No questions asked.
+            </Typography>
+          </Box>
         </Fade>
-      </Container>
+      </FullWidth>
     </Box>
+  );
+};
+
+/* --------------------------------- Trust us -------------------------------- */
+const WhyTrustUsSection = () => {
+  const theme = useTheme();
+  return (
+    <Box sx={{ py: 12, backgroundColor: "#1a1a2e" }}> 
+      <FullWidth>
+        <Fade direction="up" triggerOnce>
+          <SectionTitle variant="h3" component="h2" align="center" sx={{ mb: 6, color: '#fff' }}>
+            Why Investors Trust Us
+          </SectionTitle>
+        </Fade>
+        <Grid container spacing={4} alignItems="center">
+          <Grid item xs={12} md={6}>
+            <Fade direction="left" triggerOnce>
+              <Paper 
+                className="lp-card" 
+                sx={{ 
+                  display: "flex", 
+                  justifyContent: "center", 
+                  p: 4,
+                  borderRadius: 4,
+                  backgroundColor: alpha(theme.palette.primary.main, 0.03),
+                  border: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
+                }}
+              >
+                <VerifiedUser
+                  sx={{
+                    fontSize: { xs: 200, sm: 240, md: 280 },
+                    color: alpha(theme.palette.secondary.main, 0.15),
+                  }}
+                />
+              </Paper>
+            </Fade>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Fade direction="right" triggerOnce>
+              <List>
+                {whyTrustUsItems.map((item) => (
+                  <ListItem key={item.primary} sx={{ py: 2 }}>
+                    <ListItemIcon sx={{ minWidth: 44 }}>
+                      <Box
+                        sx={{
+                          width: 36,
+                          height: 36,
+                          borderRadius: 2,
+                          backgroundColor: alpha(theme.palette.primary.main, 0.1),
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                      >
+                        {item.icon}
+                      </Box>
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={item.primary}
+                      secondary={item.secondary}
+                      primaryTypographyProps={{ 
+                        fontWeight: 700, 
+                        color: '#fff', // Changed to white
+                        fontSize: '1.1rem',
+                        mb: 0.5,
+                      }}
+                      secondaryTypographyProps={{
+                        color: alpha('#fff', 0.7), // Changed to semi-transparent white
+                        lineHeight: 1.6,
+                      }}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Fade>
+          </Grid>
+        </Grid>
+      </FullWidth>
+    </Box>
+  );
+};
+
+/* --------------------------------- CTA + footer ---------------------------- */
+const CallToActionSection = () => (
+  <Box sx={{ 
+    py: 12, 
+    background: "linear-gradient(135deg, #000 0%, #1a1a2e 100%)", 
+    color: "#fff",
+    position: 'relative',
+    overflow: 'hidden',
+  }}>
+    <Box
+      sx={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: `
+          radial-gradient(ellipse 80% 50% at 50% 50%, rgba(120, 119, 198, 0.1), transparent)
+        `,
+        zIndex: 1,
+      }}
+    />
+    <FullWidth sx={{ textAlign: "center", position: 'relative', zIndex: 2 }}>
+      <Fade direction="up" triggerOnce>
+        <Typography variant="h3" component="h2" gutterBottom fontWeight={900} sx={{ color: "#fff" }}>
+          Ready to Elevate Your Investment Strategy?
+        </Typography>
+      </Fade>
+      <Fade direction="up" delay={100} triggerOnce>
+        <Typography variant="h6" paragraph sx={{ mb: 4, color: alpha("#fff", 0.85), lineHeight: 1.6 }}>
+          Join thousands of investors who are making smarter decisions. Sign up today and take the
+          first step towards financial clarity.
+        </Typography>
+      </Fade>
+      <Fade direction="up" delay={200} triggerOnce>
+        <HeroButton 
+          variant="contained" 
+          color="primary" 
+          size="large" 
+          component={RouterLink} 
+          to="/signup" 
+          endIcon={<ArrowForward />}
+          sx={{
+            background: 'linear-gradient(135deg, #3B82F6, #1D4ED8)',
+          }}
+        >
+          Start Tracking for Free
+        </HeroButton>
+      </Fade>
+    </FullWidth>
+  </Box>
 );
 
-// Footer Section
 const PageFooterContainer = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-  color: theme.palette.text.secondary,
+  backgroundColor: "#f8fafc",
   padding: theme.spacing(4, 2),
   textAlign: "center",
   borderTop: `1px solid ${theme.palette.divider}`,
 }));
 
 const PageFooter = () => (
-    <PageFooterContainer>
-      <Container maxWidth="lg">
-        <Typography variant="body2">© {new Date().getFullYear()} InvestTracker. All rights reserved.</Typography>
-        <Box sx={{ mt: 1 }}>
-          <Button component={RouterLink} to="/privacy" color="inherit" size="small" sx={{ textTransform: "none", mx: 1 }}>Privacy Policy</Button>
-          <Button component={RouterLink} to="/terms" color="inherit" size="small" sx={{ textTransform: "none", mx: 1 }}>Terms of Service</Button>
-          <Button component={RouterLink} to="/support" color="inherit" size="small" sx={{ textTransform: "none", mx: 1 }}>Support</Button> {/* Add this line */}
-        </Box>
-      </Container>
-    </PageFooterContainer>
+  <PageFooterContainer className="lp-footer">
+    <FullWidth>
+      <Typography variant="body2" sx={{ color: '#64748b' }}>
+        © {new Date().getFullYear()} Portfolio Tracker. All rights reserved.
+      </Typography>
+      <Box sx={{ mt: 1 }}>
+        <Button component={RouterLink} to="/privacy" size="small" sx={{ textTransform: "none", mx: 1, color: '#64748b' }}>
+          Privacy Policy
+        </Button>
+        <Button component={RouterLink} to="/terms" size="small" sx={{ textTransform: "none", mx: 1, color: '#64748b' }}>
+          Terms of Service
+        </Button>
+        <Button component={RouterLink} to="/support" size="small" sx={{ textTransform: "none", mx: 1, color: '#64748b' }}>
+          Support
+        </Button>
+      </Box>
+    </FullWidth>
+  </PageFooterContainer>
 );
 
-// --- Main LandingPage Component ---
+/* --------------------------------- Page ----------------------------------- */
 const LandingPage = () => {
   return (
-    <Box sx={{ overflowX: "hidden", bgcolor: "background.default" }}>
+    <Box className="landing" sx={{ overflowX: "hidden" }}>
       <NavigationBar />
       <main>
         <Hero />

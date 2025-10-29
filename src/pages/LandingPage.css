@@ -1,0 +1,130 @@
+/* Enhanced CSS for Landing Page */
+
+.landing {
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+}
+
+/* Improved hero section with better gradients */
+.lp-hero--dark {
+  background-image:
+    radial-gradient(1200px 500px at 50% -10%, rgba(120, 119, 198, 0.15), transparent 60%),
+    linear-gradient(180deg, #000 0%, #1a1a2e 100%);
+}
+
+/* Enhanced gradient text */
+.lp-gradient-text {
+  background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Improved card styling */
+.lp-card {
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Add these styles to ensure consistent feature card heights */
+@media (max-width: 960px) {
+  .lp-card {
+    min-height: auto;
+  }
+}
+
+/* Better footer styling */
+.lp-footer {
+  color: rgba(0, 0, 0, 0.6);
+  background: #fafafa;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Improved text contrast */
+.landing .MuiTypography-root {
+  word-wrap: break-word;
+}
+
+.landing .MuiTypography-body2 {
+  line-height: 1.6;
+}
+
+.landing .MuiTypography-h6 {
+  line-height: 1.5;
+}
+
+/* Enhanced button transitions */
+.landing .MuiButton-root {
+  transition: all 0.3s ease !important;
+}
+
+/* Better focus states for accessibility */
+.landing .MuiButton-root:focus-visible {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+}
+
+/* Improved mobile responsiveness */
+@media (max-width: 900px) {
+  .lp-hero--dark {
+    padding-top: 80px !important; /* Reduced from 96px */
+    padding-bottom: 60px !important; /* Reduced from 96px */
+    min-height: 80vh !important; /* Changed from 100vh */
+  }
+  
+  .landing .MuiTypography-h2 {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .landing .MuiTypography-h3 {
+    font-size: 2rem !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .landing .MuiTypography-h2 {
+    font-size: 2rem !important;
+  }
+  
+  .landing .MuiTypography-h3 {
+    font-size: 1.75rem !important;
+  }
+  
+  .landing .MuiContainer-root {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* Remove any default body gutter from the app shell */
+.landing {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom scrollbar for webkit browsers */
+.landing ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.landing ::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.landing ::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.landing ::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
