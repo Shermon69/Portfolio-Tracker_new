@@ -511,10 +511,12 @@ const FeaturesSection = () => {
               <Fade direction="up" delay={i * 120} triggerOnce>
                 <FeatureItem elevation={0} className="lp-card">
                   <IconTile bg={f.bg}>{f.icon}</IconTile>
-                  <Typography variant="h6" fontWeight={700} gutterBottom sx={{ color: '#1e293b' }}>
+                  <Typography variant="h6" fontWeight={700} gutterBottom sx={{ 
+                    color: '#ffffff' // Changed to bright white
+                  }}>
                     {f.title}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: '#64748b', lineHeight: 1.6 }}> {/* Medium gray */}
+                  <Typography variant="body2" sx={{ color: '#64748b', lineHeight: 1.6 }}>
                     {f.desc}
                   </Typography>
                 </FeatureItem>
@@ -536,6 +538,7 @@ const VisualFeatureCard = styled(Card)(({ theme }) => ({
   border: `1px solid ${alpha(theme.palette.divider, 0.1)}`,
   borderRadius: 20,
   transition: "all 0.3s ease",
+  backgroundColor: "#1a1a2e",  // Added dark background
   boxShadow: `0 4px 20px ${alpha(theme.palette.common.black, 0.05)}`,
   "&:hover": { 
     transform: "translateY(-8px)", 
@@ -576,8 +579,14 @@ const VisualFeaturesSection = () => {
                     {feature.icon}
                   </Box>
                   <CardContent sx={{ p: 4, flexGrow: 1 }}>
-                    <Typography variant="h5" component="h3" fontWeight={800} gutterBottom sx={{ color: '#1e293b' }}>
-                      {feature.title}
+                    <Typography 
+                        variant="h5" 
+                        component="h3" 
+                        fontWeight={800} 
+                        gutterBottom 
+                        sx={{ color: '#ffffff' }}  // Changed from '#1e293b' to white
+                    >
+                        {feature.title}
                     </Typography>
                     <Typography sx={{ color: '#64748b', lineHeight: 1.6 }}>
                       {feature.description}
