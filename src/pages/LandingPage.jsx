@@ -81,7 +81,7 @@ const features = [
 ];
 
 const visualFeatures = [
-  { title: "Best Portfolio Tracker", description: "Stay on top of your investments with real-time insights and analytics.", icon: <Assessment sx={{ fontSize: 80 }} /> },
+  { title: "Best Portfolio Tracker", description: "Track your portfolio and make decisions with live data insights", icon: <Assessment sx={{ fontSize: 80 }} /> },
   { title: "Secure and Private", description: "Your data is encrypted and protected with top-grade security.", icon: <AdminPanelSettings sx={{ fontSize: 80 }} /> },
   { title: "Multi-Device Access", description: "Use the app on desktop, tablet, or mobile – synced across all.", icon: <Devices sx={{ fontSize: 80 }} /> },
 ];
@@ -530,38 +530,67 @@ const FeaturesSection = () => {
           </Box>
         </Fade>
 
-        <Grid container spacing={4} alignItems="stretch">
-          {marketing.map((f, i) => (
-            <Grid item xs={12} sm={6} md={3} key={f.title}>
-              <Fade direction="up" delay={i * 120} triggerOnce>
-                <FeatureItem elevation={0} className="lp-card">
-                  <IconTile bg={f.bg}>{f.icon}</IconTile>
-                  <Typography 
-                    variant="h6" 
-                    fontWeight={700} 
-                    gutterBottom 
+        {/* Added container div for better centering */}
+        <Box sx={{ 
+          maxWidth: 'lg',
+          mx: 'auto', // Center the container
+          px: { xs: 2, sm: 4 } // Add some padding on smaller screens
+        }}>
+          <Grid 
+            container 
+            spacing={4} 
+            alignItems="stretch"
+            justifyContent="center" // Center the grid items
+          >
+            {marketing.map((f, i) => (
+              <Grid 
+                item 
+                xs={12} 
+                sm={6} 
+                md={3} 
+                key={f.title}
+                sx={{ 
+                  display: 'flex',
+                  justifyContent: 'center' // Center each grid item
+                }}
+              >
+                <Fade direction="up" delay={i * 120} triggerOnce>
+                  <FeatureItem 
+                    elevation={0} 
+                    className="lp-card"
                     sx={{ 
-                      color: '#fff',
-                      mb: 2
+                      width: '100%', // Ensure full width within grid
+                      maxWidth: 340 // Limit maximum width
                     }}
                   >
-                    {f.title}
-                  </Typography>
-                  <Typography 
-                    variant="body2" 
-                    sx={{ 
-                      color: alpha('#fff', 0.7),
-                      lineHeight: 1.6,
-                      flex: 1 // This helps with content alignment
-                    }}
-                  >
-                    {f.desc}
-                  </Typography>
-                </FeatureItem>
-              </Fade>
-            </Grid>
-          ))}
-        </Grid>
+                    <IconTile bg={f.bg}>{f.icon}</IconTile>
+                    <Typography 
+                      variant="h6" 
+                      fontWeight={700} 
+                      gutterBottom 
+                      sx={{ 
+                        color: '#fff',
+                        mb: 2
+                      }}
+                    >
+                      {f.title}
+                    </Typography>
+                    <Typography 
+                      variant="body2" 
+                      sx={{ 
+                        color: alpha('#fff', 0.7),
+                        lineHeight: 1.6,
+                        flex: 1
+                      }}
+                    >
+                      {f.desc}
+                    </Typography>
+                  </FeatureItem>
+                </Fade>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </FullWidth>
     </Box>
   );
@@ -1071,7 +1100,7 @@ const PageFooter = () => (
   <PageFooterContainer className="lp-footer">
     <FullWidth>
       <Typography variant="body2" sx={{ color: '#64748b' }}>
-        © {new Date().getFullYear()} InvestTracker. All rights reserved.
+        © {new Date().getFullYear()} Portfolio Tracker. All rights reserved.
       </Typography>
       <Box sx={{ mt: 1 }}>
         <Button component={RouterLink} to="/privacy" size="small" sx={{ textTransform: "none", mx: 1, color: '#64748b' }}>

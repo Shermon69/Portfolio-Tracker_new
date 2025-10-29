@@ -404,7 +404,7 @@ const FAQPage = () => {
               Frequently Asked Questions
             </Typography>
             <Typography variant="h6" textAlign="center" color="text.secondary" sx={{ mb: 6, maxWidth: 600, margin: "0 auto" }}>
-              Quick answers to the most common questions about using InvestTracker
+              Quick answers to the most common questions about using Portfolio Tracker
             </Typography>
             
             {filteredFAQs.length > 0 ? (
@@ -456,7 +456,7 @@ const FAQPage = () => {
             </Typography>
             <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Typography variant="body1" sx={{ fontWeight: 500 }}>
-                📧 support@investtracker.com
+                📧 support@PortfolioTracker.com
               </Typography>
               <Typography variant="body1" color="text.secondary">
                 • Typically respond within 24 hours
