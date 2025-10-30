@@ -29,7 +29,7 @@
   height: 100%;
 }
 
-/* Add these styles to ensure consistent feature card heights */
+
 @media (max-width: 960px) {
   .lp-card {
     min-height: auto;
@@ -71,7 +71,7 @@ html {
   outline-offset: 2px;
 }
 
-/* Improved mobile responsiveness */
+
 @media (max-width: 900px) {
   .lp-hero--dark {
     padding-top: 80px !important; /* Reduced from 96px */

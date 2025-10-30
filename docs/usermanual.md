@@ -12,6 +12,10 @@ Table of Contents:
 
     Navigating the Application
 
+    Landing Page (Public)
+
+        Support Page
+
     Dashboard / Home Page
 
         Viewing Transactions
@@ -19,6 +23,8 @@ Table of Contents:
         Adding Transactions Manually
 
         Importing Transactions via CSV (General)
+
+        FAQ Page
 
     Managing Brokers & Importing Data
 
@@ -59,7 +65,7 @@ Creating an Account
 
     Open the Portfolio Tracker application in your web browser.
 
-    If you are new, click on the "Sign Up" link, usually found in the header or on the landing page.
+    On the Landing Page, click the "Sign Up" button in the header.
 
     Fill in the required information:
 
@@ -81,7 +87,7 @@ Logging In
 
     Open the Portfolio Tracker application.
 
-    Click on the "Login" or "Sign In" link.
+    Click the "Login" or "Sign In" link in the header.
 
     Enter your registered Email Address and Password.
 
@@ -91,35 +97,53 @@ Logging In
 
 2. Navigating the Application
 
-The main navigation is located in the header at the top of the page. Key sections include:
+The application has two main navigation states:
 
-    Home: Your main dashboard, showing transactions and import options.
+Before Login (Public View):
+    Landing Page: Modern redesigned homepage with updated section cards and improved visuals.
+    Support: Replaces previous "About" and "Contact" links.
 
-    Brokers: Manage and import data from specific brokers.
+After Login (Authenticated View):
+    The main navigation is located in the header at the top of the page. Key sections include:
 
-    Holdings: View a summary of your current investments.
+        Home: Your main dashboard, showing transactions and import options.
 
-    Performance: Analyze the performance of your portfolio.
+        Brokers: Manage and import data from specific brokers.
 
-    Pricing: (If available) View subscription plans.
+        Holdings: View a summary of your current investments.
 
-    Features: (If available) Learn about application features.
+        Performance: Analyze the performance of your portfolio.
 
-    Income: (If implemented) Track your investment income.
+        Reports: Generate various financial reports.
 
-    Activities: View a log of all your financial activities (transactions, dividends).
+        Settings: Configure your application and portfolio preferences.
 
-    Settings: Configure your application and portfolio preferences.
+        FAQ: Quick access to frequently asked questions and educational resources.
 
-    Profile Icon (Top Right): Click this to access:
+        Profile Icon (Top Right): Click this to access:
 
-        Your Profile (linked to Settings)
+            Your Profile (linked to Settings)
 
-        Admin Dashboard (if you are an admin)
+            Admin Dashboard (if you are an admin)
 
-        Sign Out
+            Sign Out
 
-3. Dashboard / Home Page (HomePage.jsx)
+3. Support Page (Public)
+
+    Accessible via the "Support" link in the navigation bar.
+
+    Contains two main sections:
+
+        About Portfolio Tracker:
+            Overview of the platform’s mission, features, and benefits.
+            Information about the team and development.
+
+        Contact Us:
+            A form allowing users to send support requests directly.
+            Fields include: Name, Email, Subject, Message.
+            Submission sends an email to the support team.
+
+4. Dashboard / Home Page (HomePage.jsx)
 
 This is your central hub after logging in.
 Viewing Transactions
@@ -190,7 +214,21 @@ Importing Transactions via CSV (General) (EnhancedCSVUploader.jsx)
 
     If there's an error (e.g., wrong format, missing columns), an error message will appear. You can then "Cancel" and try again.
 
-4. Managing Brokers & Importing Data (Broker.jsx, BrokerUpload.jsx)
+FAQ Page
+
+    Accessible via the "FAQ" link in the Home page header.
+
+    Features:
+        Search bar to instantly filter FAQs by keyword.
+        List of frequently asked questions with clear answers.
+        Educational Articles section with curated links to trusted external sources on:
+            Investing basics
+            Portfolio management
+            Choosing brokers
+            Tax implications
+           
+
+5. Managing Brokers & Importing Data (Broker.jsx, BrokerUpload.jsx)
 
 This section allows you to import data from specific, supported brokers.
 
@@ -214,7 +252,7 @@ This section allows you to import data from specific, supported brokers.
 
     The page will also display any existing transactions already imported from this broker. You can delete individual transactions or all data for this specific broker.
 
-5. Viewing Holdings (Holdings.jsx)
+6. Viewing Holdings (Holdings.jsx)
 
     Navigate to the "Holdings" page.
 
@@ -227,7 +265,7 @@ This section allows you to import data from specific, supported brokers.
         Table of Holdings: A list of your current securities, showing symbol, company name, quantity, current price, and total value.
         (Note: Real-time price updates and detailed value calculations depend on backend logic and data sources not fully detailed in the provided files.)
 
-6. Analyzing Performance (Performance.jsx)
+7. Analyzing Performance (Performance.jsx)
 
     Navigate to the "Performance" page.
 
@@ -248,7 +286,7 @@ This section allows you to import data from specific, supported brokers.
     Assets Table (AssetsTable.jsx): A table listing your assets with details like price, quantity, value, capital gains, dividends, and return.
     (Note: Accuracy of capital gains, dividends, and return depends on comprehensive transaction data and backend calculations.)
 
-7. Generating Reports (Reports.jsx, ReportRoutes.jsx)
+8. Generating Reports (Reports.jsx, ReportRoutes.jsx)
 
     Navigate to the "Reports" page.
 
@@ -272,7 +310,7 @@ This section allows you to import data from specific, supported brokers.
 
     Click "Run Report" to view the specific report page.
 
-8. Managing Settings (Settings.jsx)
+9. Managing Settings (Settings.jsx)
 
 Navigate to the "Settings" page to customize your application and portfolio preferences. The settings are organized into tabs:
 General Settings
@@ -369,7 +407,7 @@ Your Profile
 
     May provide a link to manage more detailed account settings (e.g., password change) if integrated with an external service like Supabase's user management UI.
 
-9. Pricing and Features (PricingPage.jsx, FeaturesPage.jsx)
+10. Pricing and Features (PricingPage.jsx, FeaturesPage.jsx)
 
     Features Page: Displays key highlights and capabilities of the Portfolio Tracker application.
 
@@ -383,7 +421,7 @@ Your Profile
 
         Buttons to "Choose Plan".
 
-10. Admin Dashboard (For Administrators) (AdminDashboard.jsx)
+11. Admin Dashboard (For Administrators) (AdminDashboard.jsx)
 
 If you have administrator privileges, you can access the Admin Dashboard.
 
@@ -411,7 +449,7 @@ If you have administrator privileges, you can access the Admin Dashboard.
 
         Click "Save Configuration" to apply changes.
 
-11. Troubleshooting & FAQ
+12. Troubleshooting & FAQ
 
     CSV Import Fails:
 
@@ -434,3 +472,9 @@ If you have administrator privileges, you can access the Admin Dashboard.
         Verify all transaction data (buys, sells, dividends, fees) is entered accurately.
 
         Ensure correct currencies and exchange rates (if applicable) are set in General Settings.
+
+    Need more help?
+
+        Visit the FAQ Page (accessible from the Home header) for instant answers and educational articles.
+
+        Or use the Contact Us form on the Support Page to reach our team directly.

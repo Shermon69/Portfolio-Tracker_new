@@ -1,7 +1,7 @@
 # Portfolio Tracker: Solution Design Overview
 
-**Version:** 1.0
-**Date:** 19/05/2025
+**Version:** 1.1  
+**Date:** 27/10/2025
 
 ## 1. Introduction
 
@@ -88,6 +88,21 @@ The system follows a **client-server architecture** with a modern web frontend a
     *   Modify user account types/roles (simulated for some actions due to client-side limitations).
     *   Configure system-wide settings (e.g., default currency, upload limits).
 
+### 4.6. Support & User Guidance (New)
+
+*   **Support Page (Public):**
+    *   Replaces previous "About" and "Contact" navigation items.
+    *   Accessible from the landing page navigation bar via a single **Support** link.
+    *   Contains:
+        *   **About Section:** Detailed information about the Portfolio Tracker platform, its purpose, and team.
+        *   **Contact Us Form:** Allows users to send support emails directly via a frontend form (client-side submission to email service or backend endpoint).
+*   **FAQ Page (Authenticated Users):**
+    *   Accessible post-login via a new **FAQ** link in the home page header.
+    *   Features:
+        *   Hardcoded FAQ entries covering common user queries.
+        *   **Search Functionality:** Real-time filtering of FAQs based on user input.
+        *   **Educational Articles Section:** Curated list of external articles from trusted sources on topics such as portfolio management, investing basics, broker selection, and financial tracking.
+
 ## 5. Data Flow Overview
 
 1.  **User Authentication:** User -> Frontend (Login/Signup Page) -> Supabase Auth. Session token returned to Frontend.
@@ -102,6 +117,10 @@ The system follows a **client-server architecture** with a modern web frontend a
 *   **MUI Framework:** Utilizes Material-UI for a consistent, modern look and feel, and responsive design.
 *   **Theming:** Supports light and dark modes for user preference.
 *   **Clarity & Simplicity:** Aims for straightforward presentation of financial data.
+*   **Modernized Landing Page (Updated):**
+    *   Complete visual overhaul with contemporary design language.
+    *   Redesigned section cards with improved typography, spacing, and visual hierarchy.
+    *   Enhanced responsiveness and aesthetic appeal while maintaining accessibility and performance.
 
 ## 7. Security Considerations
 
